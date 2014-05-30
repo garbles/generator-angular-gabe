@@ -12,19 +12,24 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       this.installDependencies();
       var that = this,
-        githubRepo = 'https://github.com/garbles/' + that.packageName;
+        githubRepoName = 'https://github.com/garbles/' + that.packageName;
 
-      that.spawnCommand('hub', ['init']).on('exit', function () {
-        that.spawnCommand('hub', ['add', '.']).on('exit', function () {
-          that.spawnCommand('hub', ['commit', '-m Initialize']).on('exit', function () {
-            that.spawnCommand('hub', ['create', that.packageName]).on('exit', function () {
-              that.spawnCommand('git', ['push', 'origin', 'head']).on('exit', function () {
-                that.spawnCommand('bower', ['register', that.packageName, githubRepo]);
+
+      if (that.githubRepo) {
+        that.spawnCommand('hub', ['init']).on('exit', function () {
+          that.spawnCommand('hub', ['add', '.']).on('exit', function () {
+            that.spawnCommand('hub', ['commit', '-m Initialize']).on('exit', function () {
+              that.spawnCommand('hub', ['create', that.packageName]).on('exit', function () {
+                that.spawnCommand('git', ['push', 'origin', 'head']).on('exit', function () {
+                  if (that.bowerRepo) {
+                    that.spawnCommand('bower', ['register', that.packageName, githubRepoName]);
+                  }
+                });
               });
             });
           });
         });
-      });
+      }
     });
   },
 
@@ -42,6 +47,19 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     }, {
       name: 'packageKeywords',
       message: 'What are some keywords (separate by commas)?'
+    }, {
+      type: 'confirm',
+      name: 'githubRepo',
+      message: 'Should we automatically create a new github repo?',
+      default: true
+    }, {
+      when: function (response) {
+        return response.githubRepo;
+      },
+      type: 'confirm',
+      name: 'bowerRepo',
+      message: 'Should we automatically create a bower repo?',
+      default: true
     }];
 
     this.prompt(prompts, function (props) {
@@ -51,6 +69,9 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
 
       var keywords = props.packageKeywords.split(/\s*\,\s*/).concat('angular');
       this.packageKeywords = '["' + keywords.join('\",\"') + '"]';
+
+      this.githubRepo = props.githubRepo;
+      this.bowerRepo = props.bowerRepo;
 
       done();
     }.bind(this));

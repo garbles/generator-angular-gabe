@@ -1,4 +1,4 @@
-# generator-angular-gabe [![Build Status](https://secure.travis-ci.org/garbles/generator-angular-gabe.png?branch=master)](https://travis-ci.org/garbles/generator-angular-gabe)
+# generator-angular-gabe
 
 > [Yeoman](http://yeoman.io) generator
 
