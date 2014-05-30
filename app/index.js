@@ -14,12 +14,11 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
       var that = this,
         githubRepoName = 'https://github.com/garbles/' + that.packageName;
 
-
       if (that.githubRepo) {
         that.spawnCommand('hub', ['init']).on('exit', function () {
           that.spawnCommand('hub', ['add', '.']).on('exit', function () {
             that.spawnCommand('hub', ['commit', '-m Initialize']).on('exit', function () {
-              that.spawnCommand('hub', ['create', that.packageName]).on('exit', function () {
+              that.spawnCommand('hub', ['create', that.packageName, '-d', that.packageDescription]).on('exit', function () {
                 that.spawnCommand('git', ['push', 'origin', 'head']).on('exit', function () {
                   if (that.bowerRepo) {
                     that.spawnCommand('bower', ['register', that.packageName, githubRepoName]);
