@@ -72,6 +72,8 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
       this.githubRepo = props.githubRepo;
       this.bowerRepo = props.bowerRepo;
 
+      this.currentYear = (new Date()).getFullYear();
+
       done();
     }.bind(this));
   },
@@ -88,6 +90,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     this.template('_package.json', 'package.json');
     this.template('_bower.json', 'bower.json');
     this.template('_README.md', 'README.md');
+    this.template('_LICENSE', 'LICENSE');
   },
 
   projectfiles: function () {
