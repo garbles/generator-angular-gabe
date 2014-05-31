@@ -91,6 +91,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     this.template('_bower.json', 'bower.json');
     this.template('_README.md', 'README.md');
     this.template('_LICENSE', 'LICENSE');
+    this.template('_travis.yml', '.travis.yml');
   },
 
   projectfiles: function () {
