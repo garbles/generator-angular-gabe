@@ -7,7 +7,16 @@ describe('<%= packageName %>', function () {
     $scope = $rootScope.$new();
   }));
 
+  // happy path(s)
   it('', function () {
-
   });
+
+  // null input path
+  it('', function () {
+  });
+
+  // wrong type path
+  it('', function () {
+  });
+
 });
