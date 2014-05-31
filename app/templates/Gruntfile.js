@@ -55,7 +55,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', ['clean', 'test', 'concat', 'uglify']);
-  grunt.registerTask('test', ['jshint', 'karma:single']);
-  grunt.registerTask('test:continuous', ['jshint', 'karma:continuous']);
+  grunt.registerTask('build', ['clean', 'concat', 'uglify']);
+  grunt.registerTask('test', ['build', 'jshint', 'karma:single']);
+  grunt.registerTask('test:continuous', ['build', 'jshint', 'karma:continuous']);
 };
