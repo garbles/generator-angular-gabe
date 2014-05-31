@@ -23,6 +23,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "grunt-cli": "0.1.13",
     "load-grunt-tasks": "~0.2.0",
     "karma": "~0.12.14",
     "karma-chrome-launcher": "~0.1.0",
