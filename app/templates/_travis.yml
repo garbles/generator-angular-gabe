@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - '0.10'
+before_script:
+  - npm install -g bower
+  - bower install
 before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != '<%= packageName %>' ]; then cd .. && eval "mv $currentfolder <%= packageName %>" && cd <%= packageName %>; fi
