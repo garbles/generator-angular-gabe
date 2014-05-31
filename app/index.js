@@ -62,7 +62,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      this.packageName = 'angular-' + props.packageName;
+      this.packageName = 'angular-gs-' + props.packageName;
       this.namespacedPackageName = 'gs.' + props.packageName;
       this.packageDescription = props.packageDescription;
 
