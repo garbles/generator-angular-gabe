@@ -7,5 +7,5 @@ before_script:
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - currentfolder=${PWD##*/}
+  - currentfolder=<%= "${PWD##*/}" %>
   - if [ "$currentfolder" != '<%= packageName %>' ]; then cd .. && eval "mv $currentfolder <%= packageName %>" && cd <%= packageName %>; fi
