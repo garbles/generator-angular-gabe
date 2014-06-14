@@ -3,6 +3,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 }
 
 (function(window, angular, undefined) {'use strict';
-angular.module('<%= namespacedPackageName %>', [])
+
+angular.module('<%= namespacedPackageName %>', []);
 
 })(window, window.angular);
