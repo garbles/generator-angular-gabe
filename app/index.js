@@ -80,7 +80,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     var mainSrc = 'src/' + this.packageName + '.js',
-      testSrc = 'test/' + this.packageName + '_spec.js';
+      testSrc = 'test/' + this.packageName + '.spec.js';
 
     this.mkdir('src');
     this.mkdir('test');
@@ -98,7 +98,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     this.copy('gitignore', '.gitignore');
     this.copy('jshintrc', '.jshintrc');
     this.copy('karma.conf.js', 'karma.conf.js');
-    this.copy('Gruntfile.js', 'Gruntfile.js');
+    this.copy('Gulpfile.js', 'Gulpfile.js');
   }
 });
 

@@ -24,6 +24,18 @@
     "karma-phantomjs-launcher": "~0.1.0",
     "karma-firefox-launcher": "~0.1.0",
     "karma-jasmine": "~0.1.5",
-    "jshint-stylish": "~0.1.3"
+    "jshint-stylish": "~0.1.3",
+    "yargs": "*",
+    "semver": "*",
+    "gulp": "3.8.1",
+    "gulp-concat": "*",
+    "gulp-ng-annotate": "*",
+    "gulp-jshint": "*",
+    "gulp-uglify": "*",
+    "gulp-rename": "*",
+    "gulp-shell": "*",
+    "gulp-bump": "*",
+    "gulp-karma": "*",
+    "gulp-rimraf": "*"
   }
 }
