@@ -2,8 +2,7 @@
 var util = require('util'),
   path = require('path'),
   yeoman = require('yeoman-generator'),
-  yosay = require('yosay'),
-  chalk = require('chalk');
+  yosay = require('yosay');
 
 var AngularGabeGenerator = yeoman.generators.Base.extend({
   init: function () {
