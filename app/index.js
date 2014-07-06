@@ -16,7 +16,11 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
         commit = 'hub commit -m "Initialize"',
         create = 'hub create ' + this.packageName + ' -d ' + this.packageDescription,
         push = 'hub push origin head',
-        bower = 'bower register ' + this.packageName + ' ' + 'https://github.com/garbles/' + this.packageName;
+        bower = 'bower register ' + this.packageName + ' ' + 'https://github.com/garbles/' + this.packageName,
+
+      installBowerPackages = function (dependency) {
+        this.shell.exec('bower install '+ dependency +' --save');
+      }.bind(this);
 
       if (this.githubRepo) {
         commands = commands.concat([init, add, commit, create, push]);
@@ -27,6 +31,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
       }
 
       this.installDependencies();
+      this.bowerDependencies.forEach(installBowerPackages);
       this.shell.exec(commands.join(' && '));
     });
   },
@@ -46,6 +51,9 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
       name: 'packageKeywords',
       message: 'What are some keywords (separate by commas)?'
     }, {
+      name: 'bowerDependencies',
+      message: 'What bower packages would you like to depend on? (seperate by commas)?'
+    }, {
       type: 'confirm',
       name: 'githubRepo',
       message: 'Should we automatically create a new github repo?',
@@ -64,6 +72,7 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
       this.packageName = 'angular-gs-' + props.packageName;
       this.namespacedPackageName = 'gs.' + props.packageName;
       this.packageDescription = props.packageDescription;
+      this.bowerDependencies = props.bowerDependencies.split(/\s*\,\s*/);
 
       var keywords = props.packageKeywords.split(/\s*\,\s*/).concat('angular');
       this.packageKeywords = '["' + keywords.join('\",\"') + '"]';
