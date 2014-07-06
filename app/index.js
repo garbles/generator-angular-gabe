@@ -1,34 +1,34 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
-var yosay = require('yosay');
-var chalk = require('chalk');
+var util = require('util'),
+  path = require('path'),
+  yeoman = require('yeoman-generator'),
+  yosay = require('yosay'),
+  chalk = require('chalk');
 
 var AngularGabeGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
 
     this.on('end', function () {
-      this.installDependencies();
-      var that = this,
-        githubRepoName = 'https://github.com/garbles/' + that.packageName;
+      var commands = [],
 
-      if (that.githubRepo) {
-        that.spawnCommand('hub', ['init']).on('exit', function () {
-          that.spawnCommand('hub', ['add', '.']).on('exit', function () {
-            that.spawnCommand('hub', ['commit', '-m Initialize']).on('exit', function () {
-              that.spawnCommand('hub', ['create', that.packageName, '-d', that.packageDescription]).on('exit', function () {
-                that.spawnCommand('git', ['push', 'origin', 'head']).on('exit', function () {
-                  if (that.bowerRepo) {
-                    that.spawnCommand('bower', ['register', that.packageName, githubRepoName]);
-                  }
-                });
-              });
-            });
-          });
-        });
+        init = 'hub init',
+        add = 'hub add .',
+        commit = 'hub commit -m "Initialize"',
+        create = 'hub create ' + this.packageName + ' -d ' + this.packageDescription,
+        push = 'hub push origin head',
+        bower = 'bower register ' + this.packageName + ' ' + 'https://github.com/garbles/' + this.packageName;
+
+      if (this.githubRepo) {
+        commands = commands.concat([init, add, commit, create, push]);
       }
+
+      if (this.bowerRepo) {
+        commands.push(bower);
+      }
+
+      this.installDependencies();
+      this.shell.exec(commands.join(' && '));
     });
   },
 
