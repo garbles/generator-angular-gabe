@@ -16,7 +16,7 @@
     "test",
     "karma.conf.js",
     "package.json",
-    "README.md"
+    "Gulpfile.js"
   ],
   "dependencies": {
     "angular": ">= 1.0.0"
