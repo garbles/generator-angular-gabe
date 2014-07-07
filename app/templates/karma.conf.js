@@ -2,14 +2,7 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'src/**/*.js',
-      'src/*.js',
-      'test/**/*_spec.js',
-      'test/*_spec.js'
-    ],
+    // files: [], DO NOT ADD FILES HERE. ADD THEM TO specFiles in Gulpfile.js
     exclude: [],
     reporters: ['progress'],
     port: 9876,
