@@ -9,30 +9,33 @@ var AngularGabeGenerator = yeoman.generators.Base.extend({
     this.pkg = require('../package.json');
 
     this.on('end', function () {
+      this.installDependencies();
+      this.shell.exec('git init');
+
       var commands = [],
 
-        init = 'hub init',
-        add = 'hub add .',
-        commit = 'hub commit -m "Initialize"',
-        create = 'hub create ' + this.packageName + ' -d ' + this.packageDescription,
-        push = 'hub push origin head',
-        bower = 'bower register ' + this.packageName + ' ' + 'https://github.com/garbles/' + this.packageName,
+        add = 'git add .',
+        commit = 'git commit -m "Initialize"',
+        push = 'git push origin head',
+        bower = 'bower register ' + this.packageName + ' https://github.com/garbles/' + this.packageName,
 
       installBowerPackages = function (dependency) {
         this.shell.exec('bower install '+ dependency +' --save');
       }.bind(this);
 
-      if (this.githubRepo) {
-        commands = commands.concat([init, add, commit, create, push]);
-      }
-
-      if (this.bowerRepo) {
-        commands.push(bower);
-      }
-
-      this.installDependencies();
       this.bowerDependencies.forEach(installBowerPackages);
-      this.shell.exec(commands.join(' && '));
+
+      if (this.githubRepo) {
+        commands = commands.concat([add, commit, push]);
+
+        if (this.bowerRepo) {
+          commands.push(bower);
+        }
+
+        this.spawnCommand('hub', ['create', this.packageName, '-d', this.packageDescription]).on('exit', function () {
+          this.shell.exec(commands.join(' && '));
+        }.bind(this));
+      }
     });
   },
 
